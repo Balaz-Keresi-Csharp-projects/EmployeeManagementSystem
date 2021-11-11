@@ -1,0 +1,16 @@
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\bin\Debug\net5.0\EmployeeManagementSystem.exe
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\bin\Debug\net5.0\EmployeeManagementSystem.deps.json
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\bin\Debug\net5.0\EmployeeManagementSystem.runtimeconfig.json
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\bin\Debug\net5.0\EmployeeManagementSystem.runtimeconfig.dev.json
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\bin\Debug\net5.0\EmployeeManagementSystem.dll
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\bin\Debug\net5.0\ref\EmployeeManagementSystem.dll
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\bin\Debug\net5.0\EmployeeManagementSystem.pdb
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\obj\Debug\net5.0\EmployeeManagementSystem.csproj.AssemblyReference.cache
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\obj\Debug\net5.0\EmployeeManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\obj\Debug\net5.0\EmployeeManagementSystem.AssemblyInfoInputs.cache
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\obj\Debug\net5.0\EmployeeManagementSystem.AssemblyInfo.cs
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\obj\Debug\net5.0\EmployeeManagementSystem.csproj.CoreCompileInputs.cache
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\obj\Debug\net5.0\EmployeeManagementSystem.dll
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\obj\Debug\net5.0\ref\EmployeeManagementSystem.dll
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\obj\Debug\net5.0\EmployeeManagementSystem.pdb
+C:\Users\Balazs\source\repos\EmployeeManagementSystem\obj\Debug\net5.0\EmployeeManagementSystem.genruntimeconfig.cache
