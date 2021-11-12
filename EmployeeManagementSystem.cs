@@ -16,7 +16,7 @@ namespace EmployeeManagementSystem
         {
             availableActions = new Dictionary<string, string>();
             availableActions.Add("1", "List all of the employees in the system");
-            availableActions.Add("2", "Report some hours of work for the employee");
+            availableActions.Add("2", "Register some hours of work for the employee");
             availableActions.Add("3", "Calculate the wage of an employee");
             availableActions.Add("4", "Pay the wage for the employee");
             availableActions.Add("5", "List all of the available actions");
@@ -24,7 +24,7 @@ namespace EmployeeManagementSystem
 
             employees.Add(new Employee("Jovan", "Andric"));
             employees.Add(new Employee("Milica", "Komosar"));
-            employees.Add(new Employee("Aneta", "Derkovic"));
+            employees.Add(new Employee("Anetta", "Derkovity"));
             employees.Add(new Employee("John", "Smith"));
         }
         public void Activate()
@@ -33,12 +33,16 @@ namespace EmployeeManagementSystem
             bool exit = false;
             while (!exit)
             {
+                Console.WriteLine();
                 Console.Write("Chose your action: ");
                 string action = Console.ReadLine();
                 switch (action)
                 {
                     case "1":
                         Console.WriteLine(ListAllEmployees());
+                        break;
+                    case "2":
+                        RegisterWorkHourForEmployee(); // This is only to propagate logic to the UI
                         break;
                     case "5":
                         Console.WriteLine(ListAvailableActions());
@@ -76,6 +80,38 @@ namespace EmployeeManagementSystem
             }
 
             return outputString.ToString();
+        }
+
+        public void RegisterWorkHourForEmployee()
+        {
+            Console.Write("Type the name of employee, for which you want to register the work hours. Type 'ret' if you want to return to the main menu. ");
+            while (true)
+            {
+                string selectedEmployeeName = Console.ReadLine();
+                if (selectedEmployeeName.Equals("ret"))
+                    break;  
+                
+                Employee selectedEmployee = employees.Find(condition => condition.Name.Equals(selectedEmployeeName));
+                
+                if ( selectedEmployee != null)
+                {
+                    Console.Write("How much hours did {0} work? ", selectedEmployee.Name);
+                    int workHours;
+                    while (true)
+                    {
+                        bool success = Int32.TryParse(Console.ReadLine(), out workHours);
+                        if (success)
+                            break;
+                        Console.WriteLine("The working hours must be entered as an integer");
+                    }
+                    Console.WriteLine(selectedEmployee.RegisterWorkHours(workHours)); 
+                    break;
+                }
+
+                Console.WriteLine("The employee with the name {0} does not exist in the database. Please type a correct name. Type 'ret' if you want to return to the main menu. ", selectedEmployeeName);
+            }
+
+
         }
 
     }
