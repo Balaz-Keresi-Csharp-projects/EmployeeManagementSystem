@@ -24,7 +24,7 @@ namespace EmployeeManagementSystem
 
             employees.Add(new Employee("Jovan", "Andric"));
             employees.Add(new Employee("Milica", "Komosar"));
-            employees.Add(new Employee("Anetta", "Derkovity"));
+            employees.Add(new Employee("Silene", "Oliveria"));
             employees.Add(new Employee("John", "Smith"));
         }
         public void Activate()
@@ -85,34 +85,28 @@ namespace EmployeeManagementSystem
         public void RegisterWorkHourForEmployee()
         {
             Console.Write("Type the name of employee, for which you want to register the work hours. Type 'ret' if you want to return to the main menu. ");
-            while (true)
+            string selectedEmployeeName = Console.ReadLine();
+            Employee selectedEmployee = SelectEmployeeByName(selectedEmployeeName);
+
+            try
             {
-                string selectedEmployeeName = Console.ReadLine();
-                if (selectedEmployeeName.Equals("ret"))
-                    break;  
-                
-                Employee selectedEmployee = employees.Find(condition => condition.Name.Equals(selectedEmployeeName));
-                
-                if ( selectedEmployee != null)
-                {
-                    Console.Write("How much hours did {0} work? ", selectedEmployee.Name);
-                    int workHours;
-                    while (true)
-                    {
-                        bool success = Int32.TryParse(Console.ReadLine(), out workHours);
-                        if (success)
-                            break;
-                        Console.WriteLine("The working hours must be entered as an integer");
-                    }
-                    Console.WriteLine(selectedEmployee.RegisterWorkHours(workHours)); 
-                    break;
-                }
-
-                Console.WriteLine("The employee with the name {0} does not exist in the database. Please type a correct name. Type 'ret' if you want to return to the main menu. ", selectedEmployeeName);
+                Console.Write("How much hours did {0} work? ", selectedEmployee.Name);
+                int workHours = Int32.Parse(Console.ReadLine());
+                Console.WriteLine(selectedEmployee.RegisterWorkHours(workHours));
             }
-
-
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("Worker with name: '{0}' does not exist in the database", selectedEmployeeName);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Number of work hours should be an integer parmaeter");
+            }
         }
 
+        public Employee SelectEmployeeByName(string selectedEmployeeName)
+        {
+            return employees.Find(condition => condition.Name.Equals(selectedEmployeeName));
+        }
     }
 }
