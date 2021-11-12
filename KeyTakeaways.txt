@@ -1,0 +1,4 @@
+1. It is good to identify Logical Units inside the code. For instance: EmployeeManagementSystem class should be responsible for the logic behind the whole system, and a separate Employee class is handy to handle logic of one employee.
+2. Sometimes it is hard to define boundaries between the number of those classes. Sometimes overoptimization can take place
+3. Maybe it is good to spot areas for extension: E.g.: The system can contain huge number of employees, so it is good to think about, how to handle them.
+	a. Another example, when we define actions: It is not that intuitive, but if the system can be extended with more actions, it is maybe good take care of that with a proper infrastructure.
