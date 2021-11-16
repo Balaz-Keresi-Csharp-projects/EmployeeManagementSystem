@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem
 {
@@ -37,39 +35,22 @@ namespace EmployeeManagementSystem
             return employees.Find(condition => condition.Name.Equals(selectedEmployeeName));
         }
 
-        public void RegisterWorkHourForEmployee()
+        public void RegisterWorkHourForEmployee(string selectedEmployeeName, int hoursWorked)
         {
-            Console.Write("Type the name of employee, for which you want to register the work hours. Type 'ret' if you want to return to the main menu. ");
-            string selectedEmployeeName = Console.ReadLine();
             Employee selectedEmployee = SelectEmployeeByName(selectedEmployeeName);
-
-            try
-            {
-                Console.Write("How much hours did {0} work? ", selectedEmployee.Name);
-                int workHours = Int32.Parse(Console.ReadLine());
-                Console.WriteLine(selectedEmployee.RegisterWorkHours(workHours));
-            }
-            catch (NullReferenceException)
-            {
-                Console.WriteLine("Worker with name: '{0}' does not exist in the database", selectedEmployeeName);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Number of work hours should be an integer parmaeter");
-            }
+            selectedEmployee.RegisterWorkHours(hoursWorked);
         }
 
-        public void CalculateWageForEmployee(string selectedEmployeeName)
+        public int CalculateWageForEmployee(string selectedEmployeeName)
         {
             Employee selectEmployee = SelectEmployeeByName(selectedEmployeeName);
-            int wage = selectEmployee.CalculateWage();
-            Console.WriteLine("The expected wage of employee {0} will be {1}", selectedEmployeeName, wage);
+            return selectEmployee.CalculateWage();
         }
 
         public void PayEmployee(string selectedEmployeeName)
         {
             Employee selectedEmployee = SelectEmployeeByName(selectedEmployeeName);
-            Console.WriteLine(selectedEmployee.Pay());
+            selectedEmployee.Pay();
         }
     }
 }

@@ -31,23 +31,32 @@ namespace EmployeeManagementSystem
             }
         }
 
-        public string RegisterWorkHours(int workHours)
+        public void RegisterWorkHours(int workHours)
         {
             this.hoursWorked += workHours;
-            return String.Format("The employee {0} performed work for {1} hours so far.", Name, this.hoursWorked);
+            Console.WriteLine("The employee {0} performed work for {1} hours so far.", Name, this.hoursWorked);
+            /* We see, that this method for Employee class uses Console to perform operations. This should not be mixed with the operations, which are done on the UserInterface class.
+             * The UserInterface class is responsible to communicate with the user.
+             * Here the Console works as a placeholder. The messages ensure that, we did some useful work and the method was called from outside. It is not needed to refactor.
+             * Similarly, this method may operate with the database or something else.
+             */
         }
 
         public int CalculateWage()
         {
             return hourlyWage * hoursWorked;
         }
-        public string Pay()
+        public void Pay()
         {
             int currentWage = this.CalculateWage();
             receivedWage += currentWage;
-            string returnString = String.Format("The employee {0} got paid for {1} hours of work with {2} dollars. He/she got {3} dollars so far.", Name, hoursWorked, currentWage, receivedWage);
+            Console.WriteLine("The employee {0} got paid for {1} hours of work with {2} dollars. He/she got {3} dollars so far.", Name, hoursWorked, currentWage, receivedWage);
             hoursWorked = 0;
-            return returnString;
+            /* We see, that this method for Employee class uses Console to perform operations. This should not be mixed with the operations, which are done on the UserInterface class.
+             * The UserInterface class is responsible to communicate with the user.
+             * Here the Console works as a placeholder. The messages ensure that, we did some useful work and the method was called from outside. It is not needed to refactor.
+             * Similarly, this method may operate with the database or something else.
+             */
         }
     }
 }

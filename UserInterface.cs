@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem
 {
-    class EMSApplication
+    class UserInterface
     {
         EmployeeManagementSystem employeeManagementSystem;
         Dictionary<string, string> availableActions;
-        public EMSApplication()
+        public UserInterface()
         {
             employeeManagementSystem = new EmployeeManagementSystem();
 
@@ -35,6 +35,16 @@ namespace EmployeeManagementSystem
             Console.WriteLine();
         }
 
+        public string AskQuestion(string question, bool newline = false)
+        {
+            Console.Write(question);
+            if (newline)
+            {
+                Console.WriteLine("");
+            }
+            return Console.ReadLine();
+        }
+
         public void ListAvailableActions()
         {
             Console.WriteLine("The Employee Management System allows you to do the next operations:");
@@ -54,24 +64,20 @@ namespace EmployeeManagementSystem
                 Console.WriteLine();
                 Console.Write("Chose your action: ");
                 string action = Console.ReadLine();
-                string selectedEmployee;
+                
                 switch (action)
                 {
                     case "1":
-                        Console.WriteLine(employeeManagementSystem.ListAllEmployees());
+                        ListAllEmployees();
                         break;
                     case "2":
-                        employeeManagementSystem.RegisterWorkHourForEmployee();
+                        RegisterWorkHours();
                         break;
                     case "3":
-                        Console.Write("Type the name of the Employee, whom you want to calculate the wage: ");
-                        selectedEmployee = Console.ReadLine();
-                        employeeManagementSystem.CalculateWageForEmployee(selectedEmployee);
+                        CalculateWageForAnEmployee();
                         break;
                     case "4":
-                        Console.Write("Type the name of the Employee, whom you want to pay the wage: ");
-                        selectedEmployee = Console.ReadLine();
-                        employeeManagementSystem.PayEmployee(selectedEmployee);
+                        PayAnEmployee();
                         break;
                     case "5":
                         ListAvailableActions();
@@ -85,6 +91,42 @@ namespace EmployeeManagementSystem
                         break;
                 }
             }
+        }
+
+        public void ListAllEmployees()
+        {
+            Console.WriteLine(employeeManagementSystem.ListAllEmployees());
+        }
+
+        public void RegisterWorkHours()
+        {
+            string selectedEmployee = AskQuestion("Type the name of employee, for which you want to register the work hours: ");
+            try
+            {
+                int hoursWorked = Int32.Parse(AskQuestion(String.Format("How much hours did {0} work? ", selectedEmployee)));
+                employeeManagementSystem.RegisterWorkHourForEmployee(selectedEmployee, hoursWorked);
+            }
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("Worker with name: '{0}' does not exist in the database", selectedEmployee);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Number of work hours should be an integer parmaeter");
+            }
+        }
+
+        public void CalculateWageForAnEmployee()
+        {
+            string selectedEmployee  = AskQuestion("The name of the Employee, whom you want to calculate the wage: ");
+            int wage = employeeManagementSystem.CalculateWageForEmployee(selectedEmployee);
+            Console.WriteLine("The expected wage of employee {0} will be {1}", selectedEmployee, wage);
+        }
+
+        public void PayAnEmployee()
+        {
+            string selectedEmployee = AskQuestion("The name of the Employee, whom you want to pay the wage: ");
+            employeeManagementSystem.PayEmployee(selectedEmployee);
         }
     }
 }

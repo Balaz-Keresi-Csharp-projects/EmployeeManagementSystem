@@ -6,9 +6,9 @@ namespace EmployeeManagementSystem
     {
         static void Main(string[] args)
         {
-            EMSApplication application = new EMSApplication();
-            application.PresentWelcomeScreen();
-            application.CallApplicationMenu();
+            UserInterface userInterface = new UserInterface();
+            userInterface.PresentWelcomeScreen();
+            userInterface.CallApplicationMenu();
         }
     }
 }
