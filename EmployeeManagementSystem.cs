@@ -22,10 +22,10 @@ namespace EmployeeManagementSystem
             availableActions.Add("5", "List all of the available actions");
             availableActions.Add("Q", "Exit");
 
-            employees.Add(new Employee("Jovan", "Andric"));
-            employees.Add(new Employee("Milica", "Komosar"));
-            employees.Add(new Employee("Silene", "Oliveria"));
-            employees.Add(new Employee("John", "Smith"));
+            employees.Add(new Employee("Jovan", "Andric", 10));
+            employees.Add(new Employee("Milica", "Komosar", 20));
+            employees.Add(new Employee("Silene", "Oliveria", 15));
+            employees.Add(new Employee("John", "Smith", 20));
         }
         public void Activate()
         {
@@ -36,18 +36,30 @@ namespace EmployeeManagementSystem
                 Console.WriteLine();
                 Console.Write("Chose your action: ");
                 string action = Console.ReadLine();
+                string selectedEmployee;
                 switch (action)
                 {
                     case "1":
                         Console.WriteLine(ListAllEmployees());
                         break;
                     case "2":
-                        RegisterWorkHourForEmployee(); // This is only to propagate logic to the UI
+                        RegisterWorkHourForEmployee();
+                        break;
+                    case "3":
+                        Console.Write("Type the name of the Employee, whom you want to calculate the wage: ");
+                        selectedEmployee = Console.ReadLine();
+                        CalculateWageForEmployee(selectedEmployee);
+                        break;
+                    case "4":
+                        Console.Write("Type the name of the Employee, whom you want to pay the wage: ");
+                        selectedEmployee = Console.ReadLine();
+                        PayEmployee(selectedEmployee);
                         break;
                     case "5":
                         Console.WriteLine(ListAvailableActions());
                         break;
                     case "Q":
+                    case "q":
                         exit = true;
                         break;
                     default:
@@ -82,6 +94,11 @@ namespace EmployeeManagementSystem
             return outputString.ToString();
         }
 
+        public Employee SelectEmployeeByName(string selectedEmployeeName)
+        {
+            return employees.Find(condition => condition.Name.Equals(selectedEmployeeName));
+        }
+
         public void RegisterWorkHourForEmployee()
         {
             Console.Write("Type the name of employee, for which you want to register the work hours. Type 'ret' if you want to return to the main menu. ");
@@ -103,10 +120,16 @@ namespace EmployeeManagementSystem
                 Console.WriteLine("Number of work hours should be an integer parmaeter");
             }
         }
-
-        public Employee SelectEmployeeByName(string selectedEmployeeName)
+        public void CalculateWageForEmployee(string selectedEmployeeName)
         {
-            return employees.Find(condition => condition.Name.Equals(selectedEmployeeName));
+            Employee selectEmployee = SelectEmployeeByName(selectedEmployeeName);
+            int wage = selectEmployee.CalculateWage();
+            Console.WriteLine("The expected wage of employee {0} will be {1}", selectedEmployeeName, wage);
+        }
+        public void PayEmployee(string selectedEmployeeName)
+        {
+            Employee selectedEmployee = SelectEmployeeByName(selectedEmployeeName);
+            Console.WriteLine(selectedEmployee.Pay());
         }
     }
 }
